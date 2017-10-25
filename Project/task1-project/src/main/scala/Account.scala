@@ -6,7 +6,7 @@ class Account(var initialBalance: Double, val uid: Int = Bank getUniqueId) {
 		throw new IllegalAmountException("cant subtract negative numbers")
 	}
 
-  	if (amount > initialBalance) {
+  	else if (amount > initialBalance) {
   		throw new NoSufficientFundsException("Not enough money left in the account")
   	}
   	else {
