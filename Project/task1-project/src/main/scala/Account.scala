@@ -1,9 +1,11 @@
+import exceptions._
+
 class Account(var initialBalance: Double, val uid: Int = Bank getUniqueId) {
   def withdraw(amount: Double): Unit = {
-  	if (amount > initialBalance){
-  		//throw an exception
+  	if (amount > initialBalance) {
+  		throw new NoSufficientFundsException("exception!")
   	}
-  	else{
+  	else {
   		initialBalance = initialBalance - amount
   	}
   } 
