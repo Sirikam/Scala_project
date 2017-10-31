@@ -37,10 +37,25 @@ class Transaction(val transactionsQueue: TransactionQueue,
   override def run: Unit = {
 
     def doTransaction() = {
-      from withdraw amount
-      to deposit amount
+      var tries = 0
+      while (status == TransactionStatus.PENDING) {
+        println(status)
+        println(tries)
+        try {
+          from withdraw amount
+          to deposit amount
+          status = TransactionStatus.SUCCESS
+        } catch {
+          case _: Throwable => {
+            if (tries < allowedAttemps) {
+              tries = tries + 1
+            } else {
+              status = TransactionStatus.FAILED
+            }
+          }
+        }
+      }
       processedTransactions.push(this)
-      status = TransactionStatus.SUCCESS
     }
 
     if (from.uid < to.uid) from synchronized {
