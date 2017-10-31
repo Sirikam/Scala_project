@@ -39,8 +39,6 @@ class Transaction(val transactionsQueue: TransactionQueue,
     def doTransaction() = {
       var tries = 0
       while (status == TransactionStatus.PENDING) {
-        println(status)
-        println(tries)
         try {
           from withdraw amount
           to deposit amount
