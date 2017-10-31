@@ -22,9 +22,6 @@ class Bank(val allowedAttempts: Integer = 3) {
 
   private def processTransactions: Unit = {
     executorContext.execute(transactionsQueue.pop)
-    if (!transactionsQueue.isEmpty) {
-      processTransactions
-    }
 
   }
 
