@@ -15,7 +15,7 @@ class Account(val bank: Bank, initialBalance: Double) {
 		if (amount > balance) {
   			throw new NoSufficientFundsException("Not enough money left in the account")
   		}
-  		balance = balance - amount
+  		balance = new Balance(balance - amount)
   	}
   } 
   def deposit(amount: Double): Unit = {
@@ -23,7 +23,7 @@ class Account(val bank: Bank, initialBalance: Double) {
   		if (amount < 0) {
 		throw new IllegalAmountException("cant subtract negative numbers")
 		}
-  		balance = balance + amount
+  		balance = new Balance(balance + amount)
   	}
   } 
   def getBalanceAmount: Double = balance;  
