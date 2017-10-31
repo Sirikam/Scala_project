@@ -39,6 +39,7 @@ class Transaction(val transactionsQueue: TransactionQueue,
     def doTransaction() = {
       from withdraw amount
       to deposit amount
+      processedTransactions.push(this)
     }
 
     if (from.uid < to.uid) from synchronized {
@@ -50,7 +51,6 @@ class Transaction(val transactionsQueue: TransactionQueue,
         doTransaction
       }
     }
-    processedTransactions.push(this)
 
   }
 }
