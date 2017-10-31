@@ -50,8 +50,7 @@ class Transaction(val transactionsQueue: TransactionQueue,
         doTransaction
       }
     }
-
-    // Extend this method to satisfy new requirements.
+    processedTransactions.push(this)
 
   }
 }
