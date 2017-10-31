@@ -12,10 +12,10 @@ class Account(val bank: Bank, initialBalance: Double) {
   		if (amount < 0) {
 		throw new IllegalAmountException("cant subtract negative numbers")
 		} 
-		if (amount > balance) {
+		if (amount > balance.amount) {
   			throw new NoSufficientFundsException("Not enough money left in the account")
   		}
-  		balance = new Balance(balance - amount)
+  		balance = new Balance(balance.amount - amount)
   	}
   } 
   def deposit(amount: Double): Unit = {
@@ -23,10 +23,10 @@ class Account(val bank: Bank, initialBalance: Double) {
   		if (amount < 0) {
 		throw new IllegalAmountException("cant subtract negative numbers")
 		}
-  		balance = new Balance(balance + amount)
+  		balance = new Balance(balance.amount + amount)
   	}
   } 
-  def getBalanceAmount: Double = balance;  
+  def getBalanceAmount: Double = balance.amount;  
 
   def transferTo(account: Account, amount: Double) = {
     bank addTransactionToQueue (this, account, amount)
