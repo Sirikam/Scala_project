@@ -1,5 +1,5 @@
 import exceptions._
-import scala.collection.mutable
+import scala.collection.mutable._
 
 object TransactionStatus extends Enumeration {
   val SUCCESS, PENDING, FAILED = Value
