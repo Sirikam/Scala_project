@@ -21,7 +21,10 @@ class Bank(val allowedAttempts: Integer = 3) {
       }
 
   private def processTransactions: Unit = {
-    for (transaction <- transactionsQueue.iterator) executorContext.execute(transaction)
+    executorContext.execute(transactionsQueue.pop)
+    if (!transactionsQueue.isEmpty) {
+      processTransactions
+    }
 
   }
 
