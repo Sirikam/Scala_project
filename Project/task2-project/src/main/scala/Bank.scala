@@ -5,7 +5,7 @@ class Bank(val allowedAttempts: Integer = 3) {
   private var uid = 0
   private val transactionsQueue: TransactionQueue = new TransactionQueue()
   private val processedTransactions: TransactionQueue = new TransactionQueue()
-  private val executorContext = ???
+  private val executorContext = new ForkJoinPool()
 
   def addTransactionToQueue(from: Account, to: Account, amount: Double): Unit = {
     transactionsQueue push new Transaction(
@@ -19,7 +19,10 @@ class Bank(val allowedAttempts: Integer = 3) {
         }
       }
 
-  private def processTransactions: Unit = ???
+  private def processTransactions: Unit = {
+    for (transaction <- transactionsQueue.iterator) executorContext.execute(transaction)
+
+  }
 
   def addAccount(initialBalance: Double): Account = {
     new Account(this, initialBalance)
