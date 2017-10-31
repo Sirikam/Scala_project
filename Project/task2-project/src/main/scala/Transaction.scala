@@ -40,6 +40,7 @@ class Transaction(val transactionsQueue: TransactionQueue,
       from withdraw amount
       to deposit amount
       processedTransactions.push(this)
+      status = TransactionStatus.SUCCESS
     }
 
     if (from.uid < to.uid) from synchronized {
