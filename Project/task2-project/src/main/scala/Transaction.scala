@@ -22,7 +22,7 @@ class TransactionQueue {
   def peek: Transaction = q.head
 
   // Return an iterator to allow you to iterate over the queue
-  def iterator: Iterator[Transaction] = ???
+  def iterator: Iterator[Transaction] = q.toIterator
 }
 
 class Transaction(val transactionsQueue: TransactionQueue,
