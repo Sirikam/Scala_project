@@ -1,4 +1,5 @@
 import scala.concurrent.forkjoin.ForkJoinPool
+import scala.concurrent.AtomicInteger
 
 class Bank(val allowedAttempts: Integer = 3) {
 
