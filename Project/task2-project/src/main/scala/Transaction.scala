@@ -10,13 +10,13 @@ class TransactionQueue {
   private val q = new Queue[Transaction]()
 
   // Remove and return the first element from the queue
-  def pop: Transaction = q.dequeue()
+  def pop: Transaction = this.synchronized{ q.dequeue() }
 
   // Return whether the queue is empty
   def isEmpty: Boolean = q.isEmpty
 
   // Add new element to the back of the queue
-  def push(t: Transaction): Unit = q.enqueue(t)
+  def push(t: Transaction): Unit = this.synchronized{ q.enqueue(t) }
 
   // Return the first element from the queue without removing it
   def peek: Transaction = q.head
