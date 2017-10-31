@@ -4,7 +4,7 @@ class Account(val bank: Bank, initialBalance: Double) {
 
   class Balance(var amount: Double) {}
 
-  val balance = new Balance(initialBalance)
+  var balance = new Balance(initialBalance)
   val uid = bank.generateAccountId
 
   def withdraw(amount: Double): Unit = {
