@@ -95,11 +95,13 @@ class Account(val accountId: String, val bankId: String, val initialBalance: Dou
     case IdentifyActor => sender ! this
 
     case TransactionRequestReceipt(to, transactionId, transaction) => {
-      // Process receipt
-      ???
+      if (transaction.status == TransactionStatus.FAILED){
+        deposit(transaction.amount)
+      }
+      transaction.receiptReceived = true
     }
 
-    case BalanceRequest => ??? // Should return current balance
+    case BalanceRequest => sender! getBalanceAmount // Should return current balance
 
     case t: Transaction => {
       // Handle incoming transaction
