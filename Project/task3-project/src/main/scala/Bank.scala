@@ -40,7 +40,12 @@ class Bank(val bankId: String) extends Actor {
 
     case t: TransactionRequestReceipt => {
       // Forward receipt
-      this.findAccount(t.toAccountNumber).get ! t
+      val bankId = t.toAccountNumber.substring(0, 4)
+      if (bankId == this.bankId) {
+        findAccount(t.toAccountNumber.substring(4)).get ! t
+      } else {
+        findOtherBank(bankId).get ! t
+      }
     }
 
     case msg => ???
