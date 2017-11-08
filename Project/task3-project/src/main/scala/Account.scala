@@ -108,7 +108,7 @@ class Account(val accountId: String, val bankId: String, val initialBalance: Dou
       deposit(t.amount)
       BankManager.findBank(bankId) ! new TransactionRequestReceipt(t.from, t.id, t)
       // Handle incoming transaction
-      ???
+
     }
 
     case msg => ???
