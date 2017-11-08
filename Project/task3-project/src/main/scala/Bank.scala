@@ -17,8 +17,7 @@ class Bank(val bankId: String) extends Actor {
 
   def createAccount(initialBalance: Double): ActorRef = {
     // Should create a new Account Actor and return its actor reference. Accounts should be assigned with unique ids (increment with 1).
-    
-    val accountId = accountCounter.getAndIncrement()
+    val accountId = accountCounter.incrementAndGet()
     BankManager.createAccount(accountId.toString(), this.bankId, initialBalance)
   }
 
@@ -33,8 +32,8 @@ class Bank(val bankId: String) extends Actor {
   }
 
   override def receive = {
-    case CreateAccountRequest(initialBalance) => this.createAccount(initialBalance) // Create a new account
-    case GetAccountRequest(id) => this.findAccount(id) // Return account
+    case CreateAccountRequest(initialBalance) => sender ! this.createAccount(initialBalance) // Create a new account
+    case GetAccountRequest(id) => sender ! this.findAccount(id) // Return account
     case IdentifyActor => sender ! this
     case t: Transaction => processTransaction(t)
 
