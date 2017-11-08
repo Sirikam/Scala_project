@@ -105,6 +105,7 @@ class Account(val accountId: String, val bankId: String, val initialBalance: Dou
 
     case t: Transaction => {
       transactions.updated(t.id.toString, t)
+      deposit(t.amount)
       // Handle incoming transaction
       ???
     }
