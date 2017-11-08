@@ -29,9 +29,15 @@ class Account(val accountId: String, val bankId: String, val initialBalance: Dou
 
   def allTransactionsCompleted: Boolean = {
 
-    var tempList: List = getTransactions
+    var tempList = getTransactions
+
+    for (i <- tempList){
+      if (i.status == TransactionStatus.PENDING){
+        return false
+      }
+    }
+    true
     // Should return whether all Transaction-objects in transactions are completed
-    ???
   }
 
   def withdraw(amount: Double): Unit = {
