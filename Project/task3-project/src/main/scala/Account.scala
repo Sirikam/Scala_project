@@ -37,7 +37,6 @@ class Account(val accountId: String, val bankId: String, val initialBalance: Dou
       }
     }
     true
-    // Should return whether all Transaction-objects in transactions are completed
   }
 
   def withdraw(amount: Double): Unit = {
@@ -48,7 +47,7 @@ class Account(val accountId: String, val bankId: String, val initialBalance: Dou
     if (amount > balance.amount) {
         throw new NoSufficientFundsException("Not enough money left in the account")
       }
-      balance == balance.amount - amount
+      balance.amount = balance.amount - amount
     }
   }
   def deposit(amount: Double): Unit = {
@@ -56,14 +55,13 @@ class Account(val accountId: String, val bankId: String, val initialBalance: Dou
       if (amount < 0) {
     throw new IllegalAmountException("cant subtract negative numbers")
     }
-      balance == balance.amount + amount
+      balance.amount = balance.amount + amount
     }
   } 
   def getBalanceAmount: Double = balance.amount;
 
   def sendTransactionToBank(t: Transaction): Unit = {
-    // Should send a message containing t to the bank of this account
-    ???
+    BankManager.findBank(bankId)!t 
   }
 
   def transferTo(accountNumber: String, amount: Double): Transaction = {
