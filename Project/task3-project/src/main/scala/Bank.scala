@@ -55,6 +55,10 @@ class Bank(val bankId: String) extends Actor {
     
     // This method should forward Transaction t to an account or another bank, depending on the "to"-address.
     // HINT: Make use of the variables that have been defined above.
-    ???
+    if (toBankId == this.bankId){
+      this.findAccount(toAccountId).get ! t
+    } else {
+      this.findOtherBank(toBankId).get ! t
+    }
   }
 }
