@@ -98,6 +98,9 @@ class Account(val accountId: String, val bankId: String, val initialBalance: Dou
       if (transaction.status == TransactionStatus.FAILED){
         deposit(transaction.amount)
       }
+      else {
+        transaction.status = TransactionStatus.SUCCESS
+      }
       transaction.receiptReceived = true
     }
 
