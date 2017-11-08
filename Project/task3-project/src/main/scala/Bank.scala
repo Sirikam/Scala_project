@@ -40,7 +40,7 @@ class Bank(val bankId: String) extends Actor {
 
     case t: TransactionRequestReceipt => {
       // Forward receipt
-      ???
+      this.findAccount(t.toAccountNumber).get ! t
     }
 
     case msg => ???
