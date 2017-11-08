@@ -104,6 +104,7 @@ class Account(val accountId: String, val bankId: String, val initialBalance: Dou
     case BalanceRequest => sender! getBalanceAmount // Should return current balance
 
     case t: Transaction => {
+      transactions.updated(t.id.toString, t)
       // Handle incoming transaction
       ???
     }
